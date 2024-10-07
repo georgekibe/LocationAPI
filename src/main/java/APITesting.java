@@ -44,8 +44,6 @@ public class APITesting {
                 .then().log().all().assertThat().statusCode(200);
 
 
-
-
     }
 }
 
