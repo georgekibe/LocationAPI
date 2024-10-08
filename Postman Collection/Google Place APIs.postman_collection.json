@@ -1,0 +1,331 @@
+{
+	"info": {
+		"_postman_id": "cdcc7902-cadd-47c7-a173-23c0c3d88dd2",
+		"name": "Google Place APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17220040"
+	},
+	"item": [
+		{
+			"name": "Add Place API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonResponse = pm.response.json();\r",
+							"pm.collectionVariables.set(\"placeId\",jsonResponse.place_id);\r",
+							"\r",
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Validate the schema of the JSON response\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"\r",
+							"  pm.expect(responseData).to.be.an('object');\r",
+							"  pm.expect(responseData.status).to.exist.and.to.be.a('string');\r",
+							"  pm.expect(responseData.place_id).to.exist.and.to.be.a('string');\r",
+							"  pm.expect(responseData.scope).to.exist.and.to.be.a('string');\r",
+							"  pm.expect(responseData.reference).to.exist.and.to.be.a('string');\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"location\": {\n        \"lat\": -38.383494,\n        \"lng\": 33.427362\n    },\n    \"accuracy\": 50,\n    \"name\": \"Frontline house\",\n    \"phone_number\": \"(+91) 983 893 3937\",\n    \"address\": \"29, side layout, cohen 09\",\n    \"types\": [\n        \"shoe park\",\n        \"shop\"\n    ],\n    \"website\": \"http://google.com\",\n    \"language\": \"French-IN\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://rahulshettyacademy.com/maps/api/place/add/json?key={{key}}",
+					"protocol": "https",
+					"host": [
+						"rahulshettyacademy",
+						"com"
+					],
+					"path": [
+						"maps",
+						"api",
+						"place",
+						"add",
+						"json"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Place API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"\r",
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.test(\"Name and address fields must not be empty\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.name).to.exist.and.to.have.lengthOf.at.least(1, \"Name should not be empty\");\r",
+							"    pm.expect(responseData.address).to.exist.and.to.have.lengthOf.at.least(1, \"Address should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Location object contains valid latitude and longitude values\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData.location).to.exist;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://rahulshettyacademy.com/maps/api/place/get/json?place_id={{placeId}}&key={{key}}",
+					"protocol": "http",
+					"host": [
+						"rahulshettyacademy",
+						"com"
+					],
+					"path": [
+						"maps",
+						"api",
+						"place",
+						"get",
+						"json"
+					],
+					"query": [
+						{
+							"key": "place_id",
+							"value": "{{placeId}}"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Place API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.test(\"Place_id and key parameters are present in the request URL\", function () {\r",
+							"    const requestUrl = pm.request.url.toString();\r",
+							"    \r",
+							"    pm.expect(requestUrl).to.include(\"place_id\").and.to.include(\"key\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response includes the expected message for successful update\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData.msg).to.equal(\"Address successfully updated\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"place_id\": \"{{placeId}}\",\n    \"address\": \"70 winter walk, USA\",\n    \"key\": \"{{key}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://rahulshettyacademy.com/maps/api/place/update/json?place_id={{placeId}}&key={{key}}",
+					"protocol": "https",
+					"host": [
+						"rahulshettyacademy",
+						"com"
+					],
+					"path": [
+						"maps",
+						"api",
+						"place",
+						"update",
+						"json"
+					],
+					"query": [
+						{
+							"key": "place_id",
+							"value": "{{placeId}}"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Place API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"\r",
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.test(\"Ensure that sensitive information is not exposed in the response\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.not.have.property('key');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response message indicates successful deletion\", function () {\r",
+							"    pm.expect(pm.response.json().status).to.equal(\"OK\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n    \"place_id\":\"{{placeId}}\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://rahulshettyacademy.com/maps/api/place/delete/json?key={{key}}",
+					"protocol": "https",
+					"host": [
+						"rahulshettyacademy",
+						"com"
+					],
+					"path": [
+						"maps",
+						"api",
+						"place",
+						"delete",
+						"json"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "placeId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "key",
+			"value": "qaclick123",
+			"type": "string"
+		}
+	]
+}

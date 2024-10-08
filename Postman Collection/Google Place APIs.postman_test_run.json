@@ -1,0 +1,194 @@
+{
+	"id": "cfee82d6-2901-490b-83bb-66a3caba9346",
+	"name": "Google Place APIs",
+	"timestamp": "2024-10-08T18:04:10.298Z",
+	"collection_id": "17220040-cdcc7902-cadd-47c7-a173-23c0c3d88dd2",
+	"folder_id": 0,
+	"environment_id": "17220040-830b3997-020e-4538-bd0d-2791d25691f9",
+	"totalPass": 12,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2024-10-08T18:03:59.010Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "e58eb126-2368-4461-b4c7-b45903f9e456",
+			"name": "Add Place API",
+			"url": "https://rahulshettyacademy.com/maps/api/place/add/json?key=qaclick123",
+			"time": 883,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response status code is 200": true,
+				"Response time is less than 1000ms": true,
+				"Validate the schema of the JSON response": true
+			},
+			"testPassFailCounts": {
+				"Response status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 1000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Validate the schema of the JSON response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				883
+			],
+			"allTests": [
+				{
+					"Response status code is 200": true,
+					"Response time is less than 1000ms": true,
+					"Validate the schema of the JSON response": true
+				}
+			]
+		},
+		{
+			"id": "6478c629-683c-4eb3-be80-c14a2a9f9013",
+			"name": "Get Place API",
+			"url": "http://rahulshettyacademy.com/maps/api/place/get/json?place_id=1e0fcecb853c3d2a38384f4bc5c375c5&key=qaclick123",
+			"time": 2175,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response status code is 200": true,
+				"Name and address fields must not be empty": true,
+				"Location object contains valid latitude and longitude values": true
+			},
+			"testPassFailCounts": {
+				"Response status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Name and address fields must not be empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Location object contains valid latitude and longitude values": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				2175
+			],
+			"allTests": [
+				{
+					"Response status code is 200": true,
+					"Name and address fields must not be empty": true,
+					"Location object contains valid latitude and longitude values": true
+				}
+			]
+		},
+		{
+			"id": "4f27e1b5-77e9-4d7d-8026-a5ae292169da",
+			"name": "Update Place API",
+			"url": "https://rahulshettyacademy.com/maps/api/place/update/json?place_id=1e0fcecb853c3d2a38384f4bc5c375c5&key=qaclick123",
+			"time": 2952,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response status code is 200": true,
+				"Place_id and key parameters are present in the request URL": true,
+				"Response includes the expected message for successful update": true
+			},
+			"testPassFailCounts": {
+				"Response status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Place_id and key parameters are present in the request URL": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response includes the expected message for successful update": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				2952
+			],
+			"allTests": [
+				{
+					"Response status code is 200": true,
+					"Place_id and key parameters are present in the request URL": true,
+					"Response includes the expected message for successful update": true
+				}
+			]
+		},
+		{
+			"id": "d2600c7b-e6a0-4bc9-8b9b-8f4eee295f17",
+			"name": "Delete Place API",
+			"url": "https://rahulshettyacademy.com/maps/api/place/delete/json?key=qaclick123",
+			"time": 3928,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response status code is 200": true,
+				"Ensure that sensitive information is not exposed in the response": true,
+				"Response message indicates successful deletion": true
+			},
+			"testPassFailCounts": {
+				"Response status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Ensure that sensitive information is not exposed in the response": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response message indicates successful deletion": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				3928
+			],
+			"allTests": [
+				{
+					"Response status code is 200": true,
+					"Ensure that sensitive information is not exposed in the response": true,
+					"Response message indicates successful deletion": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 9938,
+	"collection": {
+		"requests": [
+			{
+				"id": "e58eb126-2368-4461-b4c7-b45903f9e456",
+				"method": "POST"
+			},
+			{
+				"id": "6478c629-683c-4eb3-be80-c14a2a9f9013",
+				"method": "GET"
+			},
+			{
+				"id": "4f27e1b5-77e9-4d7d-8026-a5ae292169da",
+				"method": "PUT"
+			},
+			{
+				"id": "d2600c7b-e6a0-4bc9-8b9b-8f4eee295f17",
+				"method": "DELETE"
+			}
+		]
+	}
+}
