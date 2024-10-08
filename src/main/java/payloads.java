@@ -18,4 +18,15 @@ public class payloads {
                 "  \"language\": \"French-IN\"\n" +
                 "}";
     }
+
+    public static String updateLocationBody(){
+        return "{\n" +
+                "    \"place_id\": \"cbeef2741cce7486303e61bbc3df2945\",\n" +
+                "    \"address\": \"705 winter walk, Kenya\",\n" +
+                "    \"key\": \"qaclick123\"\n" +
+                "}";
+    }
+
+
+
 }

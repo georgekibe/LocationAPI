@@ -43,6 +43,34 @@ public class APITesting {
                 .when().get("/maps/api/place/get/json")
                 .then().log().all().assertThat().statusCode(200);
 
+        // updating a location
+
+        String newAddress = "70 Nairobi walk, Kenya";
+
+        given().log().all().queryParam("place_id", "placeID").queryParam("key", "qaclick123").body("{\n" +
+                        "    \"place_id\": \""+placeId+ "\",\n" +
+                        "    \"address\": \""+newAddress+"\",\n" +
+                        "    \"key\": \"qaclick123\"\n" +
+                        "}")
+                .when().put("/maps/api/place/update/json")
+                .then().log().all().assertThat().statusCode(200).body("msg", equalTo("Address successfully updated"));
+
+
+
+        // Deleting a location
+
+        String deleteResponse = given().log().all().queryParam("key", "qaclick123").body("{\n" +
+                        "\n" +
+                        "    \"place_id\":\""+placeId+"\"\n" +
+                        "}\n").
+                when().delete("/maps/api/place/delete/json").
+                then().log().all().assertThat().statusCode(200).extract().asString();
+
+        JsonPath js1 = new JsonPath(deleteResponse);
+        String statusEntry = js1.getString("status");
+
+        System.out.println("The status for delete is " + statusEntry);
+
 
     }
 }
