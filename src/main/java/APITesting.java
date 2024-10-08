@@ -1,12 +1,14 @@
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
 public class APITesting {
     public static void main(String[] args) {
         RestAssured.baseURI = "https://rahulshettyacademy.com";
+
+        System.out.println("================== CREATING A LOCATION =================================================================================");
 
         /// creating a location
 
@@ -39,29 +41,39 @@ public class APITesting {
         System.out.println("The placeID is " + placeId);
 
         // showing the created location
+//        given().log().all().queryParam("key", "qaclick123").queryParam("placeId", "placeId")
+//                .when().get("/maps/api/place/get/json")
+//                .then().log().all().assertThat().statusCode(200);
+
+        System.out.println("===================GETTING LOCATION DETAILS================================================================================");
+
+        // getting the details for the created location
+
         given().log().all().queryParam("key", "qaclick123").queryParam("placeId", "placeId")
                 .when().get("/maps/api/place/get/json")
                 .then().log().all().assertThat().statusCode(200);
+
+        System.out.println("===================UPDATING A LOCATION ================================================================================");
 
         // updating a location
 
         String newAddress = "70 Nairobi walk, Kenya";
 
         given().log().all().queryParam("place_id", "placeID").queryParam("key", "qaclick123").body("{\n" +
-                        "    \"place_id\": \""+placeId+ "\",\n" +
-                        "    \"address\": \""+newAddress+"\",\n" +
+                        "    \"place_id\": \"" + placeId + "\",\n" +
+                        "    \"address\": \"" + newAddress + "\",\n" +
                         "    \"key\": \"qaclick123\"\n" +
                         "}")
                 .when().put("/maps/api/place/update/json")
                 .then().log().all().assertThat().statusCode(200).body("msg", equalTo("Address successfully updated"));
 
-
+        System.out.println("=======================DELETING LOCATION============================================================================");
 
         // Deleting a location
 
         String deleteResponse = given().log().all().queryParam("key", "qaclick123").body("{\n" +
                         "\n" +
-                        "    \"place_id\":\""+placeId+"\"\n" +
+                        "    \"place_id\":\"" + placeId + "\"\n" +
                         "}\n").
                 when().delete("/maps/api/place/delete/json").
                 then().log().all().assertThat().statusCode(200).extract().asString();
@@ -71,7 +83,7 @@ public class APITesting {
 
         System.out.println("The status for delete is " + statusEntry);
 
-
+        System.out.println("===================================================================================================");
     }
 }
 
