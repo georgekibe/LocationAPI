@@ -40,10 +40,6 @@ public class APITesting {
 
         System.out.println("The placeID is " + placeId);
 
-        // showing the created location
-//        given().log().all().queryParam("key", "qaclick123").queryParam("placeId", "placeId")
-//                .when().get("/maps/api/place/get/json")
-//                .then().log().all().assertThat().statusCode(200);
 
         System.out.println("===================GETTING LOCATION DETAILS================================================================================");
 
@@ -52,6 +48,16 @@ public class APITesting {
         given().log().all().queryParam("key", "qaclick123").queryParam("placeId", "placeId")
                 .when().get("/maps/api/place/get/json")
                 .then().log().all().assertThat().statusCode(200);
+
+
+        String getResponse = given().queryParam("key", "qaclick123").queryParam("place_id", placeId)
+                .when().get("/maps/api/place/get/json")
+                .then().log().all().assertThat().statusCode(200).extract().asString();
+
+        JsonPath js2 = new JsonPath(getResponse);
+        System.out.println(js2);
+        String getOldAddress = js2.getString("address");
+        System.out.println("The old address "+ getOldAddress);
 
         System.out.println("===================UPDATING A LOCATION ================================================================================");
 
