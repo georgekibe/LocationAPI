@@ -83,7 +83,7 @@ public class APITesting {
         String getActualAddress = js2.getString("address");
         System.out.println("The old address " + getActualAddress);
 
-        Assert.assertEquals(getActualAddress, newAddress); // testng assertion to confirm address updated successfully
+        Assert.assertEquals(getActualAddress, newAddress); // testng assertion to confirm address updated successfully, validate response
 
 
         System.out.println("=======================DELETING LOCATION============================================================================");
