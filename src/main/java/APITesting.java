@@ -5,6 +5,14 @@ import org.testng.Assert;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
+/*
+Rest Assured Automating REST API
+                1. Creating a location
+                2. Updating the created location
+                3. Retrieving the created location and checking if address correctly updated
+                4. Deleting the created location
+*/
+
 public class APITesting {
     public static void main(String[] args) {
         RestAssured.baseURI = "https://rahulshettyacademy.com";
